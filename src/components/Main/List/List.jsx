@@ -46,7 +46,7 @@ const List = () => {
                      <IconButton
                         edge="end"
                         aria-label="delete"
-                        onClick={deleteTransaction}
+                        onClick={() => deleteTransaction(transaction.id)}
                      >
                         <Delete />
                      </IconButton>
