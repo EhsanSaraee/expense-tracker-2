@@ -16,13 +16,16 @@ const App = () => {
             style={{ height: '100vh' }}
             className={mui.grid}
          >
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={4} className={mui.mobile}>
                <Details title="Income" />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={3} className={mui.main}>
                <Main />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={4} className={mui.desktop}>
+               <Details title="Income" />
+            </Grid>
+            <Grid item xs={12} sm={4} className={mui.last}>
                <Details title="Expense" />
             </Grid>
          </Grid>
