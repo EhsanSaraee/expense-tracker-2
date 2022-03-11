@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer } from 'react';
 import { ADD_TRANSACTION, DELETE_TRANSACTION } from './actionTypes';
 import reducer from './reducer';
 
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem('transactions')) || [];
 
 export const ExpenseTrackerContext = createContext(initialState);
 

@@ -1,6 +1,6 @@
 import { Card, CardHeader, Typography, CardContent } from '@material-ui/core';
-import useTransactions from '../../hooks/useTransactions';
 import { Doughnut } from 'react-chartjs-2';
+import useTransactions from '../../hooks/useTransactions';
 import useStyles from './styles';
 
 const Details = ({ title }) => {

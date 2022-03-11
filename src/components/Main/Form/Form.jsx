@@ -31,6 +31,8 @@ const Form = () => {
    const { addTransaction } = useExpenseTrackerContext();
 
    const createTransaction = () => {
+      if (Number.isNaN(Number(formData.amount)) || !formData.date.includes('-'))
+         return;
       const transaction = {
          ...formData,
          id: uuidv4(),

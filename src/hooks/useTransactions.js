@@ -8,14 +8,16 @@ import { useExpenseTrackerContext } from '../context/context';
 const useTransactions = (title) => {
    resetCategories();
    const { transactions } = useExpenseTrackerContext();
-   const transactionsPerType = transactions.filter((t) => t.type === title);
-   const total = transactionsPerType.reducer(
-      (acc, currVal) => (acc += currVal.amount)
+   const rightTransactions = transactions.filter((t) => t.type === title);
+   const total = rightTransactions.reduce(
+      (acc, currVal) => (acc += currVal.amount),
+      0
    );
-   const categories = total === 'Income' ? incomeCategories : expenseCategories;
+   const categories = title === 'Income' ? incomeCategories : expenseCategories;
 
-   transactionsPerType.forEach((t) => {
+   rightTransactions.forEach((t) => {
       const category = categories.find((c) => c.type === t.category);
+
       if (category) category.amount += t.amount;
    });
 
@@ -31,7 +33,7 @@ const useTransactions = (title) => {
       labels: filteredCategories.map((c) => c.type),
    };
 
-   return { total, chartData };
+   return { filteredCategories, total, chartData };
 };
 
 export default useTransactions;
