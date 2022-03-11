@@ -12,12 +12,17 @@ import { useState } from 'react';
 import { useExpenseTrackerContext } from '../../../context/context';
 import useStyles from './styles';
 import { v4 as uuidv4 } from 'uuid';
+import {
+   expenseCategories,
+   incomeCategories,
+} from '../../../constants/categories';
+import formatDate from '../../../utils/formatDate';
 
 const initialState = {
    amount: '',
    category: '',
    type: 'Income',
-   date: new Date(),
+   date: formatDate(new Date()),
 };
 
 const Form = () => {
@@ -34,6 +39,9 @@ const Form = () => {
       addTransaction(transaction);
       setFormData(initialState);
    };
+
+   const selectedCategories =
+      formData.type === 'Income' ? incomeCategories : expenseCategories;
 
    return (
       <Grid container spacing={2}>
@@ -65,8 +73,11 @@ const Form = () => {
                      setFormData({ ...formData, category: event.target.value })
                   }
                >
-                  <MenuItem value="Business">Business</MenuItem>
-                  <MenuItem value="Salary">Salary</MenuItem>
+                  {selectedCategories?.map((category) => (
+                     <MenuItem key={category.type} value={category.type}>
+                        {category.type}
+                     </MenuItem>
+                  ))}
                </Select>
             </FormControl>
          </Grid>
@@ -85,7 +96,10 @@ const Form = () => {
             <TextField
                value={formData.date}
                onChange={(event) =>
-                  setFormData({ ...formData, date: event.target.value })
+                  setFormData({
+                     ...formData,
+                     date: formatDate(event.target.value),
+                  })
                }
                type="date"
                label="Date"
